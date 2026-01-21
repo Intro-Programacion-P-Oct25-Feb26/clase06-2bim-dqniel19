@@ -27,6 +27,7 @@ public class Ejemplo08 {
         }
         catch(Exception e){
             
+            // Exception e tomará todos los posibles errores en el catch, es recomendable
             System.out.printf(" Lo sentimos hay un error de tipo %s\n", e);
         
         }
