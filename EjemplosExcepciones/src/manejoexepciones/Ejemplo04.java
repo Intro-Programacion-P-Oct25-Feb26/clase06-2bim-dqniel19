@@ -29,7 +29,7 @@ public class Ejemplo04 {
 
             System.out.printf("Existe un error de tipo %s\n",
                     inputMismatchException);
-        }
+        } 
         
         System.out.println("Continuamos");
 
