@@ -4,6 +4,7 @@
  */
 package paquete02;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -12,33 +13,62 @@ import java.util.Scanner;
  */
 public class Ejercicio01 {
     public static void main(String[] args) {
-        Scanner entrada = new Scanner(System.in);
-        int a = obtenerValor();
-        int b = obtenerValor();
+        int valor1 = 0;
+        int valor2 = 0;
+        boolean bandera = true;
+        while (bandera) {
+            valor1 = obtenerValor();
+            valor2 = obtenerValor();
+            if (valor2 > 0) {
+            bandera = false;}
+        }
+        
+        int suma = obtenerSuma(valor1, valor2);
+        
+        String msj = obtenerReporte(valor1, valor2, suma);
+        
+        imprimir(msj);
 
     }
     
-    public static void obtenerValor() {
+    public static int obtenerValor() {
         boolean bandera = true;
-        int a;
+        int a = 0;
         while(bandera) {
             try {
                 Scanner entrada = new Scanner(System.in);
                 System.out.println("Ingrese un valor");
                 a = entrada.nextInt();
-                if (a %2 == 0 || a >= 0) {
+                if (a %2 == 0 && a >= 0) {
                     bandera = false;} // Si a cumple con las condiciones requeridas el ciclo terminará
-                if (a %2 != 0) {
-                    throw new Exception("Número impar");
-                } else if (a < 0) {
+                if (a < 0) {
                     throw new Exception("Valor menor a 0");
+                } else if (a %2 != 0) {
+                    throw new Exception("Número impar");
                 }
-            } catch (Exception e) {
+            } catch (InputMismatchException e) { // otro tipo =! int
+            System.out.printf("(InputMismatchException) Ocurrió una "
+                    + "excepción %s\n", e);
+            } catch (Exception e) { // impar o menor a 0
             System.out.printf("Ocurrió una excepción %s\n", e);
             }
         }
 
-    System.out.printf("%d", a);    
+    return a;    
     }
     
+    public static int obtenerSuma(int a, int b) {
+        return a + b;
+    }
+    
+    public static String obtenerReporte(int a, int b, int ab) {
+        String mensaje = String.format("La suma de %d y %d es de: %d\n", 
+                a, b, ab);
+        
+        return mensaje;
+    }
+    
+    public static void imprimir(String a) {
+        System.out.printf(a);
+    }
 }
